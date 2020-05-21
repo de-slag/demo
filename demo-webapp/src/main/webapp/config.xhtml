@@ -12,15 +12,24 @@
 
 <f:loadBundle basename="com.jwt.jsf.properties.messages" var="msg" />
 
-<c:set var="pc" value="#{dwaController}" />
+<c:set var="pc" value="#{dwaConfigController}" />
 
 <h:head>
 	<title>SLAG-Demo WebApp</title>
 </h:head>
 <h:body>
-	<h:link value="Config page" outcome="config" />
+	<h:link value="Index page" outcome="index" />
 	<h:form>
-		<h:outputLabel value="#{pc.state}" />
+		<p:dataTable var="entry" value="#{pc.configurationEntries}">
+			<p:column headerText="Key">
+				<h:outputText value="#{entry.key}" />
+			</p:column>
+
+			<p:column headerText="Value">
+				<h:outputText value="#{entry.value}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
+	<h:outputLabel value="#{pc.state}" />
 </h:body>
 </html>
