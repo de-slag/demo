@@ -21,6 +21,7 @@ public class DwaConfigController {
 	@PostConstruct
 	public void init() {
 		configuration.put("test-key", "test-value");
+		resetConfig();
 	}
 	
 	public void resetConfig() {
