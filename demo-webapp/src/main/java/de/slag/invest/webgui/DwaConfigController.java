@@ -14,8 +14,12 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class DwaConfigController {
 
+	private String key;
+
+	private String value;
+
 	private final Map<String, String> configuration = new HashMap<>();
-	
+
 	private final List<ConfigEntry> configurationEntries = new ArrayList<>();
 
 	@PostConstruct
@@ -23,7 +27,7 @@ public class DwaConfigController {
 		configuration.put("test-key", "test-value");
 		resetConfig();
 	}
-	
+
 	public void resetConfig() {
 		configurationEntries.clear();
 		configurationEntries.addAll(configuration.keySet().stream().map(key -> {
@@ -37,7 +41,7 @@ public class DwaConfigController {
 	public Map<String, String> getConfiguration() {
 		return configuration;
 	}
-	
+
 	public List<ConfigEntry> getConfigurationEntries() {
 		return configurationEntries;
 	}
@@ -45,23 +49,50 @@ public class DwaConfigController {
 	public String getState() {
 		return "configController: " + configuration;
 	}
-	
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public void saveKeyValue() {
+		configuration.put(key, value);
+		key = null;
+		value = null;
+		resetConfig();
+	}
+
 	public class ConfigEntry {
 		private String key;
 		private String value;
+
 		public String getKey() {
 			return key;
 		}
+
 		public void setKey(String key) {
 			this.key = key;
 		}
+
 		public String getValue() {
 			return value;
 		}
+
 		public void setValue(String value) {
 			this.value = value;
 		}
-		
+
 	}
 
 }
