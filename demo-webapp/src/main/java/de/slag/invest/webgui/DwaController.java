@@ -6,5 +6,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class DwaController {
+	
+	public String getState() {
+		return "nix";
+	}
 
 }
