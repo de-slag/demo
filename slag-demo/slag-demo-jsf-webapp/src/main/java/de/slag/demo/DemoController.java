@@ -8,6 +8,6 @@ import javax.faces.bean.SessionScoped;
 public class DemoController {
 	
 	public String getVersion() {
-		return "0.0.1-SNAPSHOT";
+		return "0.2.0-SNAPSHOT";
 	}
 }
