@@ -19,8 +19,8 @@
 	</properties>
 
 	<dependencies>
-	
-	<dependency>
+
+		<dependency>
 			<groupId>de.slag.demo</groupId>
 			<artifactId>slag-demo-helloworld</artifactId>
 			<version>0.2.0-SNAPSHOT</version>
@@ -131,6 +131,16 @@
 				<plugin>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>3.2.2</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<mainClass>de.slag.demo.DemoController</mainClass>
+								<addDefaultImplementationEntries>
+									true
+								</addDefaultImplementationEntries>
+							</manifest>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>

@@ -6,8 +6,8 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class DemoController {
-	
+
 	public String getVersion() {
-		return "0.2.0-SNAPSHOT";
+		return DemoController.class.getPackage().getImplementationVersion();
 	}
 }
