@@ -9,5 +9,6 @@
 	<modules>
 		<module>slag-demo-jsf-webapp</module>
 		<module>slag-demo-fizzbuzz</module>
+		<module>slag-demo-basics</module>
 	</modules>
 </project>
