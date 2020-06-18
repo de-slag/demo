@@ -11,5 +11,6 @@
 		<module>slag-demo-fizzbuzz</module>
 		<module>slag-demo-basics</module>
 		<module>slag-basic-webgui-api</module>
+		<module>slag-basic-webgui</module>
 	</modules>
 </project>
