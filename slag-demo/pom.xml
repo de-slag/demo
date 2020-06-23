@@ -13,7 +13,9 @@
 		<module>slag-basic-webgui-api</module>
 		<module>slag-basic-webgui</module>
 		<module>slag-basic-backend-api</module>
+		<module>slag-basic-backend3</module>
 		<module>slag-demo-helloworld</module>
+		<module>slag-basic-model</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

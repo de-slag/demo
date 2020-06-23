@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Built-By: slipp
 Build-Jdk: 11.0.6
+Implementation-Title: demo-jsf-webapp
+Implementation-Version: 0.2.0-SNAPSHOT
+Implementation-Vendor-Id: de.slag.demo
+Main-Class: de.slag.demo.DemoController
 Created-By: Maven Integration for Eclipse
 
