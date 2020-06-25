@@ -1,5 +1,6 @@
 package de.slag.demo.slagbasicbackend3;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -64,6 +65,11 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 
 		// TODO Auto-generated method stub
 		return "all done";
+	}
+
+	@GetMapping(path = "/demo/ok", produces = MediaType.TEXT_PLAIN)
+	public String getOk() {
+		return "ok, " + LocalDateTime.now();
 	}
 
 }
