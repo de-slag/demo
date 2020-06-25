@@ -10,7 +10,6 @@
 		<module>slag-demo-jsf-webapp</module>
 		<module>slag-demo-fizzbuzz</module>
 		<module>slag-demo-basics</module>
-		<module>slag-basic-webgui-api</module>
 		<module>slag-basic-webgui</module>
 		<module>slag-basic-backend-api</module>
 		<module>slag-basic-backend3</module>
