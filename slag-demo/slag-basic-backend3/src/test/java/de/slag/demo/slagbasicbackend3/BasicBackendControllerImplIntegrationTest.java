@@ -28,31 +28,36 @@ public class BasicBackendControllerImplIntegrationTest implements Runnable {
 	}
 
 	public BasicBackendControllerImplIntegrationTest() {
+		LOG.info("run setup...");
 		Client client = ClientBuilder.newClient();
 		wtLogin = client.target(BASE_URL + "/login");
 		wtConfigProperty = client.target(BASE_URL + "/configproperty");
 		wtRunDefault = client.target(BASE_URL + "/rundefault");
+		LOG.info("setup done.");
 	}
 
 	@Override
 	public void run() {
+		LOG.info("test login...");
 		Token tokenEntity = wtLogin.request(MediaType.APPLICATION_JSON).get().readEntity(Token.class);
 		String token = tokenEntity.getTokenString();
-		LOG.info("Token: " + token);
+		LOG.info("test login done. Token: " + token);
 
 		ConfigProperty configProperty = new ConfigProperty();
 		configProperty.setKey("abc");
 		configProperty.setValue("123");
 
+		LOG.info("test config property...");
 		Response put = wtConfigProperty.queryParam("token", token).request()
 				.put(Entity.entity(configProperty, MediaType.APPLICATION_JSON));
 
 		int status = put.getStatus();
-		LOG.info("Status: " + status);
+		LOG.info("config property done. Status: " + status);
 
+		LOG.info("test run default ...");
 		String runDefaultResult = wtRunDefault.queryParam("token", token).request(MediaType.APPLICATION_JSON).get()
 				.readEntity(String.class);
-		LOG.info(runDefaultResult);
+		LOG.info("run default done, result: " + runDefaultResult);
 
 	}
 
