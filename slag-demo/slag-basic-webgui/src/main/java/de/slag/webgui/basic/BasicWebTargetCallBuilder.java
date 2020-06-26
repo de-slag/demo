@@ -59,16 +59,3 @@ public class BasicWebTargetCallBuilder {
 		GET, POST
 	}
 }
-
-//		return new BasicWebTargetCall() {
-//			
-//			ClientBuilder.newClient().target(target);
-//			
-//			
-//			
-//			@Override
-//			public Response call() throws Exception {
-//				// TODO Auto-generated method stub
-//				return null;
-//			}
-//		}
