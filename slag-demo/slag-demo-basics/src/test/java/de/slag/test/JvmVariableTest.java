@@ -12,8 +12,13 @@ class JvmVariableTest {
 	}
 
 	@Test
-	void test() {
+	void testAdvanced() {
 		assumeTrue(Boolean.getBoolean("advanced-tests"));
+		System.out.println("OK");
+	}
+	
+	@Test
+	void testSimple() {
 		System.out.println("OK");
 	}
 
