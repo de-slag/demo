@@ -27,7 +27,7 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	private static final Log LOG = LogFactory.getLog(BasicBackendControllerImpl.class);
 
 	private Map<String, Properties> map = new HashMap<>();
-	
+
 	@PostConstruct
 	public void setUp() {
 		LOG.debug("created");
@@ -70,6 +70,9 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	public String runDefault(@RequestParam String token) {
 
 		Properties properties = map.get(token);
+		if (properties == null) {
+			return "no properties found for token: " + token;
+		}
 		properties.keySet().forEach(key -> LOG.info(key + "=" + properties.get(key)));
 
 		// TODO Auto-generated method stub

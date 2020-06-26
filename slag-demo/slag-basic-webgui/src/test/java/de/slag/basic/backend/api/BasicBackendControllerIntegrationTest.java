@@ -1,3 +1,5 @@
+package de.slag.basic.backend.api;
+
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
@@ -56,8 +58,11 @@ public class BasicBackendControllerIntegrationTest implements Runnable {
 
 		// test run default
 		LOG.info("test run default ...");
-		String runDefaultResult = runDefaultgWebTarget.queryParam("token", token).request(MediaType.APPLICATION_JSON)
+		String runDefaultResult = runDefaultgWebTarget.queryParam("token", tokenString).request(MediaType.APPLICATION_JSON)
 				.get().readEntity(String.class);
+		if (!runDefaultResult.endsWith("all done")) {
+			throw new RuntimeException("not succesful: " + runDefaultResult);
+		}
 		LOG.info("run default done, result: " + runDefaultResult);
 
 	}
