@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,16 +27,24 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	private static final Log LOG = LogFactory.getLog(BasicBackendControllerImpl.class);
 
 	private Map<String, Properties> map = new HashMap<>();
+	
+	@PostConstruct
+	public void setUp() {
+		LOG.debug("created");
+	}
 
 	@Override
 	@GetMapping(path = "/login", produces = MediaType.APPLICATION_JSON)
 	public Token getLogin(@RequestParam(required = false) String username,
 			@RequestParam(required = false) String password) {
 
+		LOG.debug(String.format("login with credentials: username %s, password: %s", username, password));
+
 		final Token token = new Token();
 		String tokenString = String.valueOf(System.currentTimeMillis());
 
 		map.put(tokenString, new Properties());
+		LOG.debug(String.format("created properties for token: %s", tokenString));
 
 		token.setTokenString(tokenString);
 		LOG.info("token created: " + tokenString);
