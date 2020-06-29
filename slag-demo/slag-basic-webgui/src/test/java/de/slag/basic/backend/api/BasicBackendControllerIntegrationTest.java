@@ -13,6 +13,12 @@ import org.apache.commons.logging.impl.LogFactoryImpl;
 import de.slag.basic.model.ConfigProperty;
 import de.slag.basic.model.Token;
 
+
+/**
+ * This Test-Application tests the {@link BasicBackendController} endpoint direcly.
+ * @author slipp
+ *
+ */
 public class BasicBackendControllerIntegrationTest implements Runnable {
 
 	private static final Log LOG = LogFactoryImpl.getLog(BasicBackendControllerIntegrationTest.class);

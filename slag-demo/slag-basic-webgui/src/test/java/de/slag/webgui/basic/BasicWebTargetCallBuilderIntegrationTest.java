@@ -5,6 +5,12 @@ import javax.ws.rs.core.Response;
 
 import de.slag.basic.model.Token;
 
+/**
+ * This test application tests a basic backend implmentation using {@link BasicWebTargetCallBuilder}.
+ * @author slipp
+ *
+ */
+
 public class BasicWebTargetCallBuilderIntegrationTest {
 
 	private static final String BASIC_TARGET_URL = "http://localhost:18080/slag-basic-backend3";
