@@ -92,7 +92,7 @@ public class BasicWebTargetCallBuilder implements Builder<BasicWebTargetCall> {
 			}
 
 			private Response get() {
-				return ClientBuilder.newClient().target(target + endpoint).request(acceptedResponseType).get();
+				return webTarget.request(acceptedResponseType).get();
 			}
 
 		};

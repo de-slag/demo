@@ -6,8 +6,10 @@ import java.util.Properties;
 import java.util.concurrent.Callable;
 
 import de.slag.basic.model.Token;
+import de.slag.webgui.basic.call.RunDefaultCall;
 import de.slag.webgui.basic.call.builder.ConfigCallBuilder;
 import de.slag.webgui.basic.call.builder.LoginCallBuilder;
+import de.slag.webgui.basic.call.builder.RunDefaultCallBuilder;
 
 public class BasicWebConcreateCallBuilderIntegrationTest {
 
@@ -39,7 +41,9 @@ class Runner implements Runnable, BasicWebGuiIntegrationTest {
 		call.getClass();
 		
 
-		// TODO: implement run default call
+		final String defaultResult = call(new RunDefaultCallBuilder(()->properties).build());
+		defaultResult.getClass();
+		
 
 	}
 
