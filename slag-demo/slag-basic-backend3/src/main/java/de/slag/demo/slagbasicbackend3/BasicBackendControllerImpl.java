@@ -1,7 +1,9 @@
 package de.slag.demo.slagbasicbackend3;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -61,7 +63,10 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 			return null;
 		}
 		Properties properties = map.get(token);
-		properties.put(configProperty.getKey(), configProperty.getValue());
+		String key = configProperty.getKey();
+		String value = configProperty.getValue();
+		properties.put(key, value);
+		LOG.info(String.format("token: '%s', putted key: '%s', value: '%s'", token, key, value));
 		return null;
 	}
 
@@ -73,10 +78,15 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 		if (properties == null) {
 			return "no properties found for token: " + token;
 		}
-		properties.keySet().forEach(key -> LOG.info(key + "=" + properties.get(key)));
+		List<String> configEntries = new ArrayList<>();
+		properties.keySet().forEach(key -> {
+			String keyValuePair = key + "=" + properties.get(key);
+			configEntries.add(keyValuePair);
+			LOG.info(keyValuePair);
+		});
 
 		// TODO Auto-generated method stub
-		return "all done";
+		return String.join("\n", configEntries) + "\nall done";
 	}
 
 	@GetMapping(path = "/demo/ok", produces = MediaType.TEXT_PLAIN)
