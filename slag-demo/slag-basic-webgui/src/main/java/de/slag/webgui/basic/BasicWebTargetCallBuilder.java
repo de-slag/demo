@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 public class BasicWebTargetCallBuilder {
 
 	private String acceptedResponseType = MediaType.TEXT_PLAIN;
-	
+
 	private String requestMediaType = MediaType.APPLICATION_JSON;
 
 	private HttpMethod httpMethod = HttpMethod.GET;
@@ -20,21 +20,26 @@ public class BasicWebTargetCallBuilder {
 	private String target;
 
 	private String endpoint;
-	
+
 	private Object entity;
-	
+
 	private String token;
+
+	public BasicWebTargetCallBuilder withMethod(HttpMethod httpMethod) {
+		this.httpMethod = httpMethod;
+		return this;
+	}
 
 	public BasicWebTargetCallBuilder withToken(String token) {
 		this.token = token;
 		return this;
 	}
-	
+
 	public BasicWebTargetCallBuilder withEntity(Object entity) {
 		this.entity = entity;
 		return this;
 	}
-	
+
 	public BasicWebTargetCallBuilder withTarget(String target) {
 		this.target = target;
 		return this;
@@ -66,20 +71,22 @@ public class BasicWebTargetCallBuilder {
 					return get();
 				case PUT:
 					return put();
-					
-					
+
 				default:
 					throw new RuntimeException("not supported: " + httpMethod);
 				}
 			}
 
 			private Response put() {
-				WebTarget queryParam = webTarget.queryParam("token", token);				
+				WebTarget queryParam = webTarget.queryParam("token", token);
 				Invocation.Builder request = queryParam.request(acceptedResponseType);
 				return request.put(Entity.entity(entity, requestMediaType));
 			}
 
 			private Response get() {
+				if (token != null) {
+					return webTarget.queryParam("token", token).request(acceptedResponseType).get();
+				}
 				return webTarget.request(acceptedResponseType).get();
 			}
 		};
@@ -87,7 +94,7 @@ public class BasicWebTargetCallBuilder {
 
 	public enum HttpMethod {
 		GET,
-		
+
 		PUT
 	}
 }
