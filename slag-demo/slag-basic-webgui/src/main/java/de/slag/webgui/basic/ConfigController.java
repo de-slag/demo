@@ -12,6 +12,8 @@ import org.apache.commons.lang.StringUtils;
 @SessionScoped
 public class ConfigController {
 
+	private static final String NEWLINE = "\n";
+
 	private PropertiesSupport propertiesSupport = PropertiesSupport.getInstance();
 
 	private String configText;
@@ -26,12 +28,19 @@ public class ConfigController {
 		this.configText = configText;
 	}
 
+	public void generateDefaults() {
+		configText = "";
+		configText += PropertiesSupplier.FRONTEND_BACKEND_URL + NEWLINE;
+		configText += PropertiesSupplier.FRONTEND_USER + NEWLINE;
+		configText += PropertiesSupplier.FRONTEND_PASSWORD;
+	}
+
 	public void save() {
 		propertiesSupport.getProperties().clear();
 		if (StringUtils.isEmpty(configText)) {
 			return;
 		}
-		final List<String> asList = Arrays.asList(configText.split("\n"));
+		final List<String> asList = Arrays.asList(configText.split(NEWLINE));
 		asList.forEach(keyValue -> {
 			final String[] split = keyValue.split("=");
 			final String key = split[0];

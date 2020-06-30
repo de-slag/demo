@@ -21,6 +21,7 @@
 	<h:form>
 		<div>
 			<p:commandButton value="SAVE" ajax="false" action="#{pc.save}" />
+			<p:commandButton value="DEFAULTS" ajax="false" action="#{pc.generateDefaults}" />
 		</div>
 		<p:inputTextarea rows="20" style="width:100%;font-family:monospace"
 			value="#{pc.configText}" />
