@@ -9,7 +9,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class BasicWebTargetCallBuilder {
+public class BasicWebTargetCallBuilder implements Builder<BasicWebTargetCall> {
 
 	private String acceptedResponseType = MediaType.TEXT_PLAIN;
 
