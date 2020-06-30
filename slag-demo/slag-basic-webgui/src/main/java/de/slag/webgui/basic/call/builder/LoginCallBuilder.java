@@ -11,25 +11,22 @@ import de.slag.webgui.basic.Builder;
 import de.slag.webgui.basic.PropertiesSupplier;
 import de.slag.webgui.basic.call.LoginCall;
 
-public class LoginCallBuilder implements Builder<LoginCall> {
-
-	private final PropertiesSupplier propertiesSupplier;
+public class LoginCallBuilder extends AbstractBasicCallBuilder implements Builder<LoginCall> {
 
 	public LoginCallBuilder(PropertiesSupplier propertiesSupplier) {
-		super();
-		this.propertiesSupplier = propertiesSupplier;
+		super(propertiesSupplier);
 	}
 
 	public LoginCall build() {
-		final String backendUrl = propertiesSupplier.getBackendUrl();
+		final String backendUrl = getPropertiesSupplier().getBackendUrl();
 		Objects.requireNonNull(backendUrl,
 				String.format("property not setted: '%s'", PropertiesSupplier.FRONTEND_BACKEND_URL));
 		
-		final String user = propertiesSupplier.getUser();
+		final String user = getPropertiesSupplier().getUser();
 		Objects.requireNonNull(user,
 				String.format("property not setted: '%s'", PropertiesSupplier.FRONTEND_USER));
 		
-		final String password = propertiesSupplier.getPassword();
+		final String password = getPropertiesSupplier().getPassword();
 		Objects.requireNonNull(password,
 				String.format("property not setted: '%s'", PropertiesSupplier.FRONTEND_PASSWORD));
 

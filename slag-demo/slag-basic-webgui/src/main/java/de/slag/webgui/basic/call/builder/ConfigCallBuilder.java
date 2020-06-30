@@ -14,21 +14,18 @@ import de.slag.webgui.basic.PropertiesSupplier;
 import de.slag.webgui.basic.BasicWebTargetCallBuilder.HttpMethod;
 import de.slag.webgui.basic.call.ConfigCall;
 
-public class ConfigCallBuilder implements Builder<ConfigCall> {
-
-	private PropertiesSupplier propertiesSupplier;
+public class ConfigCallBuilder extends AbstractBasicCallBuilder implements Builder<ConfigCall> {
 
 	public ConfigCallBuilder(PropertiesSupplier propertiesSupplier) {
-		super();
-		this.propertiesSupplier = propertiesSupplier;
+		super(propertiesSupplier);
 	}
 
 	@Override
 	public ConfigCall build() {
-		final String backendUrl = propertiesSupplier.getBackendUrl();
-		final String currentToken = propertiesSupplier.getCurrentToken();
+		final String backendUrl = getPropertiesSupplier().getBackendUrl();
+		final String currentToken = getPropertiesSupplier().getCurrentToken();
 
-		final Properties properties = propertiesSupplier.get();
+		final Properties properties = getPropertiesSupplier().get();
 
 		final List<BasicWebTargetCall> calls = properties.keySet().stream().filter(key -> key instanceof String)
 				.map(key -> (String) key).filter(key -> !key.startsWith("frontend.")).map(key -> {
