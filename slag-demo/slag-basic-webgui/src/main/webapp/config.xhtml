@@ -9,25 +9,24 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<c:set var="pc" value="#{indexController}" />
+<c:set var="pc" value="#{configController}" />
 
 <h:head>
-	<title>SLAG-Demoi Basic Webgui</title>
+	<title>SLAG-Demoi Basic Webgui - Config</title>
 </h:head>
 <h:body>
 	<div>
-		<h:link value="config" outcome="config" />
+		<h:link value="Home" outcome="index" />
 	</div>
 	<h:form>
 		<div>
-			<p:commandButton value="SUBMIT" />
+			<p:commandButton value="SAVE" ajax="false" action="#{pc.save}" />
 		</div>
-		<div>
-			<p:inputTextarea rows="20" readonly="true"
-				style="width:100%;font-family:monospace" value="this is a test" />
-		</div>
-		<h:outputText value="#{pc.version}" />
+		<p:inputTextarea rows="20" style="width:100%;font-family:monospace"
+			value="#{pc.configText}" />
+
 	</h:form>
+	<h:outputText value="STATUS: #{pc.status}" />
 
 </h:body>
 </html>

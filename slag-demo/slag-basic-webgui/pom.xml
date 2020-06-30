@@ -150,7 +150,7 @@
 					<configuration>
 						<archive>
 							<manifest>
-								<mainClass>de.slag.webgui.basic.ConfigController</mainClass>
+								<mainClass>de.slag.webgui.basic.IndexController</mainClass>
 								<addDefaultImplementationEntries>
 									true
 								</addDefaultImplementationEntries>
