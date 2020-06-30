@@ -20,11 +20,11 @@
 	</div>
 	<h:form>
 		<div>
-			<p:commandButton value="SUBMIT" />
+			<p:commandButton value="SUBMIT" action="#{pc.submit}" ajax="false" />
 		</div>
 		<div>
 			<p:inputTextarea rows="20" readonly="true"
-				style="width:100%;font-family:monospace" value="this is a test" />
+				style="width:100%;font-family:monospace" value="#{pc.result}" />
 		</div>
 		<h:outputText value="#{pc.version}" />
 	</h:form>
