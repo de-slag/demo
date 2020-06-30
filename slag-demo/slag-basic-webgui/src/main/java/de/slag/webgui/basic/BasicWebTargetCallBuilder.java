@@ -1,6 +1,9 @@
 package de.slag.webgui.basic;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -23,7 +26,12 @@ public class BasicWebTargetCallBuilder implements Builder<BasicWebTargetCall> {
 
 	private Object entity;
 
-	private String token;
+	private Map<String, String> queryParams = new HashMap<>();
+	
+	public BasicWebTargetCallBuilder addQueryParam(String key, String value) {
+		queryParams.put(key, value);
+		return this;
+	}
 
 	public BasicWebTargetCallBuilder withMethod(HttpMethod httpMethod) {
 		this.httpMethod = httpMethod;
@@ -31,7 +39,7 @@ public class BasicWebTargetCallBuilder implements Builder<BasicWebTargetCall> {
 	}
 
 	public BasicWebTargetCallBuilder withToken(String token) {
-		this.token = token;
+		queryParams.put("token", token);
 		return this;
 	}
 
@@ -60,12 +68,13 @@ public class BasicWebTargetCallBuilder implements Builder<BasicWebTargetCall> {
 		Objects.requireNonNull(target, "target not setted");
 		Objects.requireNonNull(endpoint, "endpoint not setted");
 
-		WebTarget webTarget = ClientBuilder.newClient().target(target + endpoint);
+		final WebTarget webTarget = addQueryParams(ClientBuilder.newClient().target(target + endpoint));
 
 		return new BasicWebTargetCall() {
 
 			@Override
 			public Response call() throws Exception {
+
 				switch (httpMethod) {
 				case GET:
 					return get();
@@ -78,18 +87,24 @@ public class BasicWebTargetCallBuilder implements Builder<BasicWebTargetCall> {
 			}
 
 			private Response put() {
-				WebTarget queryParam = webTarget.queryParam("token", token);
-				Invocation.Builder request = queryParam.request(acceptedResponseType);
+				Invocation.Builder request = webTarget.request(acceptedResponseType);
 				return request.put(Entity.entity(entity, requestMediaType));
 			}
 
 			private Response get() {
-				if (token != null) {
-					return webTarget.queryParam("token", token).request(acceptedResponseType).get();
-				}
-				return webTarget.request(acceptedResponseType).get();
+				return ClientBuilder.newClient().target(target + endpoint).request(acceptedResponseType).get();
 			}
+
 		};
+	}
+
+	private WebTarget addQueryParams(WebTarget webTarget) {
+		WebTarget currentWebTarget = webTarget;
+		final Set<String> keySet = queryParams.keySet();
+		for (String key : keySet) {
+			currentWebTarget = currentWebTarget.queryParam(key, queryParams.get(key));
+		}
+		return currentWebTarget;
 	}
 
 	public enum HttpMethod {
