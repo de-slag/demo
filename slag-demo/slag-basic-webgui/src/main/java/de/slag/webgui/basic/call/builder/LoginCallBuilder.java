@@ -44,7 +44,5 @@ public class LoginCallBuilder implements Builder<LoginCall> {
 				return loginCall.call().readEntity(Token.class);
 			}
 		};
-
 	}
-
 }
