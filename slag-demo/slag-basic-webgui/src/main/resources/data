@@ -1,9 +1,9 @@
-/Config\_______________________________________________________________________
-[SAVE] [DEFAULTS]
+/DATA\________________________________________________________________________
+[LOAD] type[____________|\/] id|______
 +-----------------------------------------------------------------------------+
-|frontend.backend.endpoint=                                                   |
-|frontend.password=                                                           |
-|frontend.user=                                                               |
+|                                                                             |
+|                                                                             |
+|                                                                             |
 |                                                                             |
 |                                                                             |
 |                                                                             |
@@ -23,3 +23,7 @@
 |                                                                             |
 +-----------------------------------------------------------------------------+
 Status:
+
+LOAD without selection: load entity list from backend
+LOAD with selected type only: loads all entitys from this type
+LOAD with selected type and id: load values from entity identified by type and id
