@@ -12,6 +12,7 @@ import de.slag.basic.model.Token;
 import de.slag.webgui.basic.call.builder.ConfigCallBuilder;
 import de.slag.webgui.basic.call.builder.LoginCallBuilder;
 import de.slag.webgui.basic.call.builder.RunDefaultCallBuilder;
+import de.slag.webgui.basic.call.builder.SecureLoginCallBuilder;
 
 @ManagedBean
 @SessionScoped
@@ -36,7 +37,9 @@ public class IndexController {
 		results.addAll(collect);
 
 		results.add("---LOGIN---");
-		final Token call = new LoginCallBuilder(() -> propertiesSupport.getProperties()).build().call();
+		final Token call = new SecureLoginCallBuilder(() -> propertiesSupport.getProperties()).build().call()
+				.orElseThrow(() -> new RuntimeException("no token recieved"));
+		
 		final String tokenString = call.getTokenString();
 		results.add("token: " + tokenString);
 
@@ -47,12 +50,13 @@ public class IndexController {
 		results.add("result config: " + resultConfig);
 
 		results.add("---RUN DEFAULT---");
-		final String runDefaultResult = new RunDefaultCallBuilder(() -> propertiesSupport.getProperties()).build().call();	
+		final String runDefaultResult = new RunDefaultCallBuilder(() -> propertiesSupport.getProperties()).build()
+				.call();
 		results.add("result run default: " + runDefaultResult);
 
 		results.add("---FINISH---");
 		result = String.join("\n", results);
-	}	
+	}
 
 	public String getResult() {
 		return result;

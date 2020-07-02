@@ -1,15 +1,12 @@
 package de.slag.webgui.basic;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 
 import de.slag.basic.model.Token;
-import de.slag.webgui.basic.call.RunDefaultCall;
 import de.slag.webgui.basic.call.builder.ConfigCallBuilder;
-import de.slag.webgui.basic.call.builder.LoginCallBuilder;
 import de.slag.webgui.basic.call.builder.RunDefaultCallBuilder;
+import de.slag.webgui.basic.call.builder.SecureLoginCallBuilder;
 
 public class BasicWebConcreateCallBuilderIntegrationTest {
 
@@ -28,7 +25,7 @@ class Runner implements Runnable, BasicWebGuiIntegrationTest {
 
 	@Override
 	public void run() {
-		final Token token = call(new LoginCallBuilder(() -> properties).build());
+		final Token token = call(new SecureLoginCallBuilder(() -> properties).build()).get();
 
 		final String tokenString = token.getTokenString();
 		if (tokenString == null) {
