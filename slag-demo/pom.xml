@@ -15,6 +15,7 @@
 		<module>slag-basic-backend3</module>
 		<module>slag-demo-helloworld</module>
 		<module>slag-basic-model</module>
+		<module>slag-demo-misc</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
