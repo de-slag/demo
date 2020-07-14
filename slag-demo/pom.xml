@@ -13,6 +13,7 @@
 		<module>slag-basic-webgui</module>
 		<module>slag-basic-backend-api</module>
 		<module>slag-basic-backend3</module>
+		<module>slag-basic-backend4</module>
 		<module>slag-demo-helloworld</module>
 		<module>slag-basic-model</module>
 		<module>slag-demo-misc</module>
