@@ -1,4 +1,4 @@
-package de.slag.demo.slagbasicbackend4;
+package de.slag.basic.backend.api;
 
 import java.time.LocalDateTime;
 
@@ -6,14 +6,15 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.slag.basic.backend.api.BasicBackendController;
-import de.slag.basic.backend.api.BasicBackendService;
 import de.slag.basic.backend.api.BasicBackendService.BackendState;
 import de.slag.basic.model.ConfigProperty;
 import de.slag.basic.model.Token;
