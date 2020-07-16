@@ -1,4 +1,4 @@
-package de.slag.demo.slagbasicbackend4;
+package de.slag.basic.backend.api;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.slag.basic.backend.api.BasicBackendController;
-import de.slag.basic.backend.api.BasicBackendService;
 import de.slag.basic.backend.api.BasicBackendService.BackendState;
 import de.slag.basic.model.ConfigProperty;
 import de.slag.basic.model.Token;
