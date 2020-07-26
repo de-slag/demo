@@ -11,7 +11,9 @@ public class BasicBackend4ServiceImpl implements BasicBackendService {
 
 	@Override
 	public Token getLogin(String username, String password) {
-		return new Token();
+		Token token = new Token();
+		token.setTokenString(String.valueOf(System.currentTimeMillis()));
+		return token;
 	}
 
 	@Override
@@ -21,7 +23,7 @@ public class BasicBackend4ServiceImpl implements BasicBackendService {
 
 	@Override
 	public String runDefault(String token) {
-		return "false";
+		return this.getClass().getName() + ", OK!";
 	}
 
 }
