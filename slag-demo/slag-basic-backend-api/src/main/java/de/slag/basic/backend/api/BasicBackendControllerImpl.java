@@ -2,10 +2,13 @@ package de.slag.basic.backend.api;
 
 import java.time.LocalDateTime;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +27,15 @@ import de.slag.basic.model.Token;
 @RestController
 public class BasicBackendControllerImpl implements BasicBackendController {
 
+	private static final Log LOG = LogFactory.getLog(BasicBackendControllerImpl.class);
+
 	@Resource
 	private BasicBackendService basicBackendService;
+
+	@PostConstruct
+	public void init() {
+		LOG.info("initialized");
+	}
 
 	@Override
 	@GetMapping(path = "/login", produces = MediaType.APPLICATION_JSON)
@@ -38,7 +48,7 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	@PutMapping(path = "/configproperty", produces = MediaType.TEXT_PLAIN)
 	public Response putConfigProperty(@RequestParam(required = false) String token,
 			@RequestBody ConfigProperty configProperty) {
-		
+
 		final BackendState putConfigProperty = basicBackendService.putConfigProperty(token, configProperty);
 		if (putConfigProperty == BackendState.OK) {
 			return null;
