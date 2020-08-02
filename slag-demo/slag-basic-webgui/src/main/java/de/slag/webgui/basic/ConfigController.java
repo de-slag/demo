@@ -14,6 +14,8 @@ public class ConfigController {
 
 	private static final String NEWLINE = "\n";
 
+	private static final String EQUAL_SIGN = "=";
+
 	private PropertiesSupport propertiesSupport = PropertiesSupport.getInstance();
 
 	private String configText;
@@ -29,10 +31,15 @@ public class ConfigController {
 	}
 
 	public void generateDefaults() {
+		if (StringUtils.isNotBlank(configText)) {
+			status = "not overwritten existing config";
+			return;
+		}
 		configText = "";
-		configText += PropertiesSupplier.FRONTEND_BACKEND_URL + NEWLINE;
-		configText += PropertiesSupplier.FRONTEND_USER + NEWLINE;
-		configText += PropertiesSupplier.FRONTEND_PASSWORD;
+		String format = "%s" + EQUAL_SIGN + NEWLINE;
+		configText += String.format(format, PropertiesSupplier.FRONTEND_BACKEND_URL);
+		configText += String.format(format, PropertiesSupplier.FRONTEND_USER);
+		configText += String.format(format, PropertiesSupplier.FRONTEND_PASSWORD);
 	}
 
 	public void save() {
