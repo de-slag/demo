@@ -1,4 +1,4 @@
-package de.slag.trafficsim;
+package de.slag.trafficsim.b;
 
 public class TrafficParticipant {
 
