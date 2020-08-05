@@ -16,12 +16,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 @ManagedBean
 @SessionScoped
 public class SlideshowController {
+
+	private static final Log LOG = LogFactory.getLog(SlideshowController.class);
 
 	private final List<String> images = new ArrayList<>();
 
@@ -37,13 +41,21 @@ public class SlideshowController {
 	public void init() {
 		final Properties properties = new ConfigPropertiesBuilder().build();
 
-		speedInMs = Integer.valueOf(properties.getProperty("slideshow.speed"));
-		cacheFolder = properties.getProperty("slideshow.cache");
+		if (properties.isEmpty()) {
+			LOG.warn("no properties found, using default values");
+		}
+
+		speedInMs = Integer.valueOf(properties.getProperty("slideshow.speed", "7500"));
+		cacheFolder = properties.getProperty("slideshow.cache", System.getProperty("java.io.tmpdir"));
 		imageHight = properties.getProperty("slideshow.imageHeight", "350");
+
+		LOG.info("slideshow.speed: " + speedInMs);
+		LOG.info("slideshow.cache: " + cacheFolder);
+		LOG.info("slideshow.imageHeight: " + imageHight);
 
 		initImages();
 
-		this.getClass();
+		LOG.info("images initialized: " + images);
 	}
 
 	private void initImages() {
