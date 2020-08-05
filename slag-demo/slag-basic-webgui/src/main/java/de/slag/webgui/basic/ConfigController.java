@@ -50,6 +50,9 @@ public class ConfigController {
 		final List<String> asList = Arrays.asList(configText.split(NEWLINE));
 		asList.forEach(keyValue -> {
 			final String[] split = keyValue.split("=");
+			if (split.length != 2) {
+				return;
+			}
 			final String key = split[0];
 			final String value = split[1];
 			propertiesSupport.getProperties().put(key, value);
