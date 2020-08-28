@@ -39,16 +39,17 @@
 		<p:commandButton value="SUBMIT" action="#{pc.submit}" ajax="false" />
 
 		<p:dataTable var="data" value="#{pc.data}">
-			<p:column headerText="Attribute">
-				<h:outputText value="#{data.attribute}" />
+			<p:column headerText="Attribute" style="width:25%;">
+				<h:outputText value="#{data.key}" />
 			</p:column>
 
 			<p:column headerText="Value">
 				<h:outputText value="#{data.value}" />
 			</p:column>
 
-			<p:column headerText="actions">
-
+			<p:column headerText="actions" style="width:10%;">
+				<p:commandButton value="SUBMIT" action="#{pc.open(data.value)}"
+					ajax="false" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

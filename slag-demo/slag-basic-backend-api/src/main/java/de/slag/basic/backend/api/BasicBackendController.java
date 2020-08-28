@@ -3,6 +3,7 @@ package de.slag.basic.backend.api;
 import javax.ws.rs.core.Response;
 
 import de.slag.basic.model.ConfigProperty;
+import de.slag.basic.model.EntityDto;
 import de.slag.basic.model.Token;
 
 public interface BasicBackendController {
@@ -37,5 +38,19 @@ public interface BasicBackendController {
 	 * @return
 	 */
 	Response putConfigProperty(String token, ConfigProperty configProperty);
+
+	/**
+	 * implement as http-get<br>
+	 * path="/types", produces = MediaType.APPLICATION_JSON
+	 * 
+	 * @param token
+	 * @return
+	 */
+	String getTypes(String token);
+
+	/**
+	 * implement as http-get path="/entity", produces = MediaType.APPLICATION_JSON
+	 */
+	EntityDto getEntity(String token, String type, Long id);
 
 }

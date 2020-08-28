@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.slag.basic.backend.api.BasicBackendController;
 import de.slag.basic.model.ConfigProperty;
+import de.slag.basic.model.EntityDto;
 import de.slag.basic.model.Token;
 
 @RestController
@@ -92,6 +93,16 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	@GetMapping(path = "/demo/ok", produces = MediaType.TEXT_PLAIN)
 	public String getOk() {
 		return "ok, " + LocalDateTime.now();
+	}
+
+	@Override
+	public String getTypes(String token) {
+		throw new RuntimeException("not implemented yet");
+	}
+
+	@Override
+	public EntityDto getEntity(String token, String type, Long id) {
+		throw new RuntimeException("not implemented yet");
 	}
 
 }

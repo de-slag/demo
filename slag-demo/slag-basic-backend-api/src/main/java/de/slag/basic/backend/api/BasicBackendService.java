@@ -1,5 +1,8 @@
 package de.slag.basic.backend.api;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import de.slag.basic.model.ConfigProperty;
 import de.slag.basic.model.Token;
 
@@ -10,11 +13,15 @@ public interface BasicBackendService {
 	BackendState putConfigProperty(String token, ConfigProperty configProperty);
 
 	String runDefault(String token);
-	
+
 	public enum BackendState {
 		OK,
-		
+
 		NOT_OK
+	}
+
+	default Collection<String> getDataTypes() {
+		return Collections.emptyList();
 	}
 
 }

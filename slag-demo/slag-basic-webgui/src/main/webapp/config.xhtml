@@ -16,12 +16,15 @@
 </h:head>
 <h:body>
 	<div>
-		<h:link value="Home" outcome="index" />
+		<h:link value="Home" outcome="index" style="margin-right: 5px ;" />
+		<h:link value="data" outcome="data" style="margin-right: 5px ;" />
+		<h:link value="config" outcome="config" style="margin-right: 5px ;" />
 	</div>
 	<h:form>
 		<div>
 			<p:commandButton value="SAVE" ajax="false" action="#{pc.save}" />
-			<p:commandButton value="DEFAULTS" ajax="false" action="#{pc.generateDefaults}" />
+			<p:commandButton value="DEFAULTS" ajax="false"
+				action="#{pc.generateDefaults}" />
 		</div>
 		<p:inputTextarea rows="20" style="width:100%;font-family:monospace"
 			value="#{pc.configText}" />
