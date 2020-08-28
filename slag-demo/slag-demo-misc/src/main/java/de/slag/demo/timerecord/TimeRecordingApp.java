@@ -1,4 +1,4 @@
-package de.slag.demo;
+package de.slag.demo.timerecord;
 
 import java.io.FileReader;
 import java.io.IOException;
