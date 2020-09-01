@@ -75,6 +75,7 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	@Override
 	@GetMapping(path = "/types", produces = MediaType.APPLICATION_JSON)
 	public String getTypes(String token) {
+		// TODO: assert token
 		Collection<String> types = basicBackendService.getDataTypes();
 		return String.join(";", types);
 	}
@@ -83,34 +84,8 @@ public class BasicBackendControllerImpl implements BasicBackendController {
 	@GetMapping(path = "/entity", produces = MediaType.APPLICATION_JSON)
 	public EntityDto getEntity(@RequestParam String token, @RequestParam String type,
 			@RequestParam(required = false) Long id) {
-
-		final EntityDto entityDto = new EntityDto();
-		entityDto.setType(type);
-		entityDto.setId(id);
-		final List<String> fixValues = Arrays.asList("type=" + type, "id=" + id);
-		final ArrayList<String> values = new ArrayList<>(fixValues);
-
-		switch (type) {
-		case "Galaxy":
-			values.add("diameterInLightYears=120_000");
-			break;
-		case "StarSystem":
-			values.add("planetCount=8");
-			values.add("galaxy=TYPE:Galaxy:4711");
-			values.add("planets|18=TYPE:Planet:18");
-			values.add("planets|37=TYPE:Planet:37");
-			break;
-		case "Planet":
-			values.add("distanceToStarInAe=1.25");
-			values.add("starSystem=TYPE:StarSystem:98");
-			break;
-
-		default:
-			break;
-		}
-
-		entityDto.setProperties(new ArrayList<String>(values));
-		return entityDto;
+		// TODO: assert token
+		return basicBackendService.getEntity(type, id);
 	}
 
 }
