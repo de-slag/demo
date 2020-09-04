@@ -1,4 +1,4 @@
-package de.slag.demo.slagbasicbackend4;
+package de.slag.demo.slagbasicbackend5;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +13,12 @@ import de.slag.basic.model.EntityDto;
 import de.slag.basic.model.Token;
 
 @Service
-public class BasicBackend4ServiceImpl implements BasicBackendService {
+public class BasicBackend5ServiceImpl implements BasicBackendService {
 
-	private static final List<String> TYPES = Arrays.asList("Galaxy", "StarSystem", "Planet");
+	private static final String MEMBER = "Member";
+	private static final String SPECIES = "Species";
+	private static final String FAMILY = "Family";
+	private static final List<String> TYPES = Arrays.asList(FAMILY, SPECIES, MEMBER);
 
 	@Override
 	public Token getLogin(String username, String password) {
@@ -38,35 +41,26 @@ public class BasicBackend4ServiceImpl implements BasicBackendService {
 	public Collection<String> getDataTypes() {
 		return TYPES;
 	}
-	
+
 	@Override
 	public EntityDto getEntity(String type, Long id) {
-		final List<String> fixValues = Arrays.asList("type=" + type, "id=" + id);
-		final ArrayList<String> values = new ArrayList<>(fixValues);
+		final EntityDto entityDto = new EntityDto();
+		final ArrayList<String> properties = entityDto.getProperties();
+		entityDto.setType(type);
+		entityDto.setId(id);
 
 		switch (type) {
-		case "Galaxy":
-			values.add("diameterInLightYears=120_000");
+		case FAMILY:
+			properties.add(String.format("name=%s", id % 2 == 0 ? "bird" : "mammalian"));
 			break;
-		case "StarSystem":
-			values.add("planetCount=8");
-			values.add("galaxy=TYPE:Galaxy:4711");
-			values.add("planets|18=TYPE:Planet:18");
-			values.add("planets|37=TYPE:Planet:37");
-			break;
-		case "Planet":
-			values.add("distanceToStarInAe=1.25");
-			values.add("starSystem=TYPE:StarSystem:98");
-			break;
-
+		case SPECIES:
+			properties.add(String.format("name=%", id % 3 == 0 ? "A" : "B"));
+		case MEMBER:
+			properties.add(String.format("name=%-%", "Pit", id));
 		default:
-			break;
+			return BasicBackendService.super.getEntity(type, id);
 		}
-
-		EntityDto entityDto = new EntityDto();
-		entityDto.setProperties(new ArrayList<String>(values));
-		
-		
 		return entityDto;
+
 	}
 }
