@@ -10,12 +10,12 @@ import org.apache.commons.logging.LogFactory;
 
 public class AmazonConnectionBuilder {
 
-	private static final String RDS_PORT = "RDS_PORT";
-	private static final String RDS_PASSWORD = "RDS_PASSWORD";
-	private static final String RDS_USERNAME = "RDS_USERNAME";
-	private static final String RDS_DB_NAME = "RDS_DB_NAME";
-	private static final String RDS_HOSTNAME = "RDS_HOSTNAME";
-	private static final Log LOG = LogFactory.getLog(AmazonConnectionBuilder.class);
+	public static final String RDS_PORT = "RDS_PORT";
+	public static final String RDS_PASSWORD = "RDS_PASSWORD";
+	public static final String RDS_USERNAME = "RDS_USERNAME";
+	public static final String RDS_DB_NAME = "RDS_DB_NAME";
+	public static final String RDS_HOSTNAME = "RDS_HOSTNAME";
+	public static final Log LOG = LogFactory.getLog(AmazonConnectionBuilder.class);
 
 	private String dbName;
 	private String userName;
@@ -23,19 +23,44 @@ public class AmazonConnectionBuilder {
 	private String hostname;
 	private String port;
 
-	public Connection build() {
+	public AmazonConnectionBuilder() {
+		dbName = System.getProperty(RDS_DB_NAME);
+		userName = System.getProperty(RDS_USERNAME);
+		password = System.getProperty(RDS_PASSWORD);
+		hostname = System.getProperty(RDS_HOSTNAME);
+		port = System.getProperty(RDS_PORT);
+	}
+
+	public AmazonConnectionBuilder withPort(String port) {
+		this.port = port;
+		return this;
+	}
+
+	public AmazonConnectionBuilder withHostname(String hostname) {
+		this.hostname = hostname;
+		return this;
+	}
+
+	public AmazonConnectionBuilder withPassword(String password) {
+		this.password = password;
+		return this;
+	}
+
+	public AmazonConnectionBuilder withUserName(String userName) {
+		this.userName = userName;
+		return this;
+	}
+
+	public AmazonConnectionBuilder withDbName(String dbName) {
+		this.dbName = dbName;
+		return this;
+	}
+
+	public Connection build() throws AmazonConnectionBuilderException {
 		return getRemoteConnection();
 	}
 
-	public AmazonConnectionBuilder() {
-		dbName = System.getenv(RDS_DB_NAME);
-		userName = System.getenv(RDS_USERNAME);
-		password = System.getenv(RDS_PASSWORD);
-		hostname = System.getenv(RDS_HOSTNAME);
-		port = System.getenv(RDS_PORT);
-	}
-
-	private Connection getRemoteConnection() {
+	private Connection getRemoteConnection() throws AmazonConnectionBuilderException {
 		Objects.requireNonNull(dbName, RDS_DB_NAME + " is null");
 		Objects.requireNonNull(userName, RDS_USERNAME + " is null");
 		Objects.requireNonNull(password, RDS_PASSWORD + " is null");
@@ -63,6 +88,12 @@ public class AmazonConnectionBuilder {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "AmazonConnectionBuilder [dbName=" + dbName + ", userName=" + userName + ", password=" + password
+				+ ", hostname=" + hostname + ", port=" + port + "]";
 	}
 
 }
