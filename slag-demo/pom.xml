@@ -19,6 +19,8 @@
 		<module>slag-basic-model</module>
 		<module>slag-demo-misc</module>
 		<module>slag-demo-trafficsim</module>
+		<module>slag-demo-amazon-db-webapp</module>
+		
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
