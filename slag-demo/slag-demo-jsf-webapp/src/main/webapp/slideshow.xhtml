@@ -22,7 +22,7 @@
 		slideshowSpeed="#{pc.speedInMs}">
 		<ui:repeat value="#{pc.images}" var="image" id="fadeEffectImages">
 			<p:graphicImage value="#{pc.image}" id="image" stream="false"
-				onclick="PF('switcher').next();" height="#{imageHeight}" />
+				height="#{imageHeight}" />
 		</ui:repeat>
 	</p:imageSwitch>
 </h:body>
