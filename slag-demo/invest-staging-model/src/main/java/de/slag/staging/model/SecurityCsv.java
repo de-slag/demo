@@ -27,7 +27,9 @@ public interface SecurityCsv {
 
 	List<String> STRUCTURE = Arrays.asList(FETCH_TS, SYMBOL, WKN_ISIN, DATE, OPEN, CLOSE, HIGH, LOW, VOLUME, CURRENCY);
 
-	String FETCH_TS_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+	String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+	
+	String FETCH_TS_FORMAT = ISO_8601_DATE_FORMAT;
 	
 	String DATE_FORMAT = "yyyy-MM-dd";
 }
