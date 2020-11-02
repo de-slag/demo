@@ -58,7 +58,7 @@ public class InvestA4JRunnerBuilder implements Builder<InvestA4JRunner> {
 		List<String> asList = Arrays.asList(split);
 		Map<String, String> symbolWknIsinMap = new HashMap<>();
 		asList.forEach(entry -> {
-			String[] keyValue = entry.split("=");
+			String[] keyValue = entry.split(":");
 			symbolWknIsinMap.put(keyValue[0], keyValue[1]);
 		});
 
