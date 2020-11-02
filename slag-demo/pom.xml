@@ -21,6 +21,8 @@
 		<module>slag-demo-trafficsim</module>
 		<module>slag-demo-amazon-db-webapp</module>
 
+		<module>invest-alphavantage4j</module>
+		<module>invest-staging-model</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,6 +34,11 @@
 			<dependency>
 				<groupId>de.slag.common</groupId>
 				<artifactId>slag-common-core</artifactId>
+				<version>0.4.0-SNAPSHOT</version>
+			</dependency>
+				<dependency>
+				<groupId>de.slag.common</groupId>
+				<artifactId>slag-common-context</artifactId>
 				<version>0.4.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
