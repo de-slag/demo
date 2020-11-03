@@ -68,6 +68,9 @@ public class InvestA4JRunnerBuilder implements Builder<InvestA4JRunner> {
 				throw new RuntimeException("no wknIsin found for symbol: " + symbol);
 			}
 		}
+		if (symbols.size() > 4) {
+			return new InvestA4JRunner(apiKey, symbols, outputFolder, symbolWknIsinMap, 15000);
+		}
 
 		return new InvestA4JRunner(apiKey, symbols, outputFolder, symbolWknIsinMap);
 

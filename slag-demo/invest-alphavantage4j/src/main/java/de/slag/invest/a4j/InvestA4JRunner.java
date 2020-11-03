@@ -26,12 +26,20 @@ public class InvestA4JRunner implements Runnable {
 
 	private String outputFolder;
 
+	private long sleepTimeBetween;
+
 	InvestA4JRunner(String apiKey, List<String> symbols, String outputFolder, Map<String, String> symbolWknIsinMap) {
+		this(apiKey, symbols, outputFolder, symbolWknIsinMap, 0);
+	}
+
+	InvestA4JRunner(String apiKey, List<String> symbols, String outputFolder, Map<String, String> symbolWknIsinMap,
+			long sleepTimeBetween) {
 		super();
 		this.apiKey = apiKey;
 		this.symbols.addAll(symbols);
 		this.outputFolder = outputFolder;
 		this.symbolWknIsinMap.putAll(symbolWknIsinMap);
+		this.sleepTimeBetween = sleepTimeBetween;
 	}
 
 	@Override
@@ -44,17 +52,15 @@ public class InvestA4JRunner implements Runnable {
 			try {
 				stockData = a4jCall.call();
 			} catch (Exception e) {
-				throw new RuntimeException(e);
+				throw new RuntimeException("at symbol: " + symbol, e);
 			}
 
 			stockData.forEach(data -> {
-				final List<String> csvLine = new CsvLineBuilder()
-						.withSymbol(symbol)
-						.withFetchTimestamp(fetchTimestamp)
-						.withWknIsin(symbolWknIsinMap.get(symbol))
-						.withStockData(data).build();
+				final List<String> csvLine = new CsvLineBuilder().withSymbol(symbol).withFetchTimestamp(fetchTimestamp)
+						.withWknIsin(symbolWknIsinMap.get(symbol)).withStockData(data).build();
 				csvLines.add(csvLine);
 			});
+			sleepFor(sleepTimeBetween);
 		}
 		csvLines.forEach(System.out::println);
 		writeOut(csvLines);
@@ -77,7 +83,14 @@ public class InvestA4JRunner implements Runnable {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
 
+	private void sleepFor(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
